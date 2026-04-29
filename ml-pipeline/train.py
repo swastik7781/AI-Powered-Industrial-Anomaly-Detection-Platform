@@ -27,7 +27,7 @@ def train_baseline(X_train, X_test, y_test):
 def train_patchcore(X_train, X_test, y_test):
     print("--- Training Advanced PatchCore ResNet Model ---")
     model = PatchCoreModel(input_shape=(256, 256, 3), n_neighbors=1)
-    model.fit(X_train, sample_ratio=0.01)
+    model.fit(X_train, sample_ratio=0.1)
     
     image_scores, _ = model.predict(X_test)
     stats = evaluate_model(y_test, image_scores, 'results', 'PatchCore_ResNet')

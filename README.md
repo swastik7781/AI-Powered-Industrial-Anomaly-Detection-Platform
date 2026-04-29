@@ -6,6 +6,21 @@ A production-grade, end-to-end anomaly detection platform designed specifically 
 
 ---
 
+## 📸 Platform Previews
+
+<div align="center">
+  <img src="docs/live_inspection.png" alt="Live Inspection Interface" width="800"/>
+  <br/><i>Real-Time Live Inference Feed with Bounding Box Localization</i>
+  <br/><br/>
+  <img src="docs/history.png" alt="Inspection History" width="800"/>
+  <br/><i>Audit Log and Telemetry History</i>
+  <br/><br/>
+  <img src="docs/settings.png" alt="System Configuration" width="800"/>
+  <br/><i>Dynamic Model Tuning & Threshold Settings</i>
+</div>
+
+---
+
 ## 1. Machine Learning Pipeline (Strict Data Requirement)
 
 This system handles anomaly classification via structural deviations observed against nominal industrial surfaces.
@@ -74,21 +89,21 @@ The models have been thoroughly benchmarked against the MVTec AD dataset. The ad
 ### Metrics Summary
 
 **Baseline Deep UNet Autoencoder**
-- **ROC-AUC**: `0.7357` *(Note: Applying the strict bottleneck correctly distinguishes structural defects)*
-- **Best F1 Score**: `0.8630` (at threshold `-0.1032`)
+- **ROC-AUC**: `0.7587` *(Note: Applying the strict bottleneck correctly distinguishes structural defects)*
+- **Best F1 Score**: `0.8671` (at threshold `-0.0654`)
 
 **PatchCore ResNet50 (Winner)**
-- **ROC-AUC**: `0.5119` *(Note: Variable performance due to random 1% feature downsampling for memory limits)*
-- **Best F1 Score**: `0.8630` (at threshold `8.4315`)
+- **ROC-AUC**: `0.9183` *(Note: Incredible structural spatial detection capability with 10% memory subsampling)*
+- **Best F1 Score**: `0.9104` (at threshold `1.2467`)
 
 ### Performance Graphs
 
-*(To be displayed in the final project report)*
-
-**Baseline Deep UNet Autoencoder**
-![Baseline Evaluation](ml-pipeline/results/Baseline_UNet_evaluation.png)
-
-**PatchCore ResNet50 (Winner)**
-![PatchCore Evaluation](ml-pipeline/results/PatchCore_ResNet_evaluation.png)
+<div align="center">
+  <img src="ml-pipeline/results/PatchCore_ResNet_evaluation.png" alt="PatchCore Evaluation Graph" width="800"/>
+  <br/><i>PatchCore ROC and PR Curves</i>
+  <br/><br/>
+  <img src="ml-pipeline/results/Baseline_UNet_evaluation.png" alt="Baseline UNet Evaluation Graph" width="800"/>
+  <br/><i>Baseline UNet ROC and PR Curves</i>
+</div>
 
 The final configuration exports the PatchCore thresholds into `backend/models/config.json` for live inference mapping.
