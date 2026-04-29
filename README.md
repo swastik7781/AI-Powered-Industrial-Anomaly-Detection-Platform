@@ -21,6 +21,71 @@ A production-grade, end-to-end anomaly detection platform designed specifically 
 
 ---
 
+## System Architecture
+
+```mermaid
+graph TD
+    subgraph ML Pipeline [1. Machine Learning Pipeline]
+        Dataset[(MVTec AD Dataset)]
+        Download[download.py]
+        Trainer[train.py]
+        ModelHub[Deep UNet & PatchCore ResNet50]
+        Evaluator[Evaluation & Threshold Tuning]
+        
+        Download --> Dataset
+        Dataset --> Trainer
+        Trainer --> ModelHub
+        ModelHub --> Evaluator
+    end
+
+    subgraph Backend [2. FastAPI Inference Engine]
+        API[FastAPI Server /uvicorn/]
+        ModelService[Singleton Model Service]
+        DB[(SQLite Audit Database)]
+        OpenCV[OpenCV Image Preprocessor]
+        
+        API --> OpenCV
+        OpenCV --> ModelService
+        ModelService --> API
+        API --> DB
+    end
+
+    subgraph Frontend [3. React Web Client]
+        UI[React 18 + Vite UI]
+        Canvas[Dual-Canvas Inspection Viewer]
+        Settings[Global Configuration Panel]
+        Dashboard[Telemetry & History Dashboard]
+        
+        UI --> Canvas
+        UI --> Settings
+        UI --> Dashboard
+    end
+
+    %% Pipeline to Backend
+    Evaluator -- "Exports Best Weights & config.json" --> ModelService
+
+    %% Frontend to Backend
+    Canvas -- "POST /api/v1/inspect (Multipart Frames)" --> API
+    Dashboard -- "GET /api/v1/history" --> API
+    Settings -- "POST (Threshold Updates)" --> API
+
+    %% Backend to Frontend
+    API -- "Inference Matrices & Bounding Boxes" --> Canvas
+    API -- "Audit Logs & Telemetry" --> Dashboard
+    
+    classDef frontend fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff;
+    classDef backend fill:#10b981,stroke:#047857,stroke-width:2px,color:#fff;
+    classDef pipeline fill:#8b5cf6,stroke:#5b21b6,stroke-width:2px,color:#fff;
+    classDef db fill:#f59e0b,stroke:#b45309,stroke-width:2px,color:#fff;
+
+    class UI,Canvas,Settings,Dashboard frontend;
+    class API,ModelService,OpenCV backend;
+    class Dataset,Download,Trainer,ModelHub,Evaluator pipeline;
+    class DB db;
+```
+
+---
+
 ## 1. Machine Learning Pipeline (Strict Data Requirement)
 
 This system handles anomaly classification via structural deviations observed against nominal industrial surfaces.
