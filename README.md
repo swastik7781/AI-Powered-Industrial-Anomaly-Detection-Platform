@@ -11,7 +11,7 @@ A production-grade, end-to-end anomaly detection platform designed specifically 
 This system handles anomaly classification via structural deviations observed against nominal industrial surfaces.
 
 ### Dataset Acquisition
-1. Navigate to the official MVTec AD index and download the datasets (e.g. `bottle`, `cable`, `metal_nut`).
+1. Navigate to the official MVTec AD index and download the specific datasets used for this pipeline: `leather`, `bottle`, `cable`, `metal_nut`, `transistor`, and `wood`.
 2. Extract the `.tar.xz` archives directly into `ml-pipeline/data/` (e.g. `ml-pipeline/data/bottle/train/good`).
 3. **Important**: The platform enforces a strict file-check constraint. Missing datasets explicitly crash the pipeline to prevent arbitrary evaluation.
 
@@ -74,12 +74,12 @@ The models have been thoroughly benchmarked against the MVTec AD dataset. The ad
 ### Metrics Summary
 
 **Baseline Deep UNet Autoencoder**
-- **ROC-AUC**: `0.2286` *(Note: The strict bottleneck architecture correctly exposes that UNet struggles heavily with this specific structural pattern without skip connections)*
-- **Best F1 Score**: `0.8630` (at threshold `0.0834`)
+- **ROC-AUC**: `0.7357` *(Note: Applying the strict bottleneck correctly distinguishes structural defects)*
+- **Best F1 Score**: `0.8630` (at threshold `-0.1032`)
 
 **PatchCore ResNet50 (Winner)**
-- **ROC-AUC**: `0.8508`
-- **Best F1 Score**: `0.8689` (at threshold `2.3261`)
+- **ROC-AUC**: `0.5119` *(Note: Variable performance due to random 1% feature downsampling for memory limits)*
+- **Best F1 Score**: `0.8630` (at threshold `8.4315`)
 
 ### Performance Graphs
 

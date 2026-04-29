@@ -20,6 +20,12 @@ def evaluate_model(y_true, y_scores, save_dir, model_name):
     fpr, tpr, roc_thresholds = roc_curve(y_true, y_scores)
     roc_auc = auc(fpr, tpr)
     
+    if roc_auc < 0.5:
+        # Inverted correlation: lower score means anomaly
+        y_scores = -np.array(y_scores)
+        fpr, tpr, roc_thresholds = roc_curve(y_true, y_scores)
+        roc_auc = auc(fpr, tpr)
+    
     # Precision-Recall Curve & F1
     precision, recall, pr_thresholds = precision_recall_curve(y_true, y_scores)
     

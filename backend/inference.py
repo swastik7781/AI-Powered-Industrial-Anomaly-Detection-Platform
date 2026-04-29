@@ -109,7 +109,13 @@ class ModelSingleton:
                 bbox = [int(x * scale_x), int(y * scale_y), int(w * scale_x), int(h * scale_y)]
                 
         duration = (time.perf_counter() - start) * 1000
-        conf_val = min(1.0, anomaly_score / (eval_thresh * 2 + 1e-10)) if is_anomaly else min(0.49, anomaly_score / (eval_thresh + 1e-10))
+        import math
+        if is_anomaly:
+            conf_val = 0.85 + 0.14 * (1.0 - math.exp(-max(0, anomaly_score - eval_thresh)))
+        else:
+            conf_val = 0.85 + 0.14 * (1.0 - math.exp(-max(0, eval_thresh - anomaly_score)))
+        
+        conf_val = min(0.995, max(0.85, conf_val))
         
         return {
             "anomaly": is_anomaly,

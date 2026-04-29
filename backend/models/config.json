@@ -1,5 +1,5 @@
 {
     "model_type": "patchcore",
-    "baseline_threshold": 0.08341530710458755,
-    "patchcore_threshold": 2.3260819375656996
+    "baseline_threshold": -0.10316740721464157,
+    "patchcore_threshold": 8.431498186205706
 }
