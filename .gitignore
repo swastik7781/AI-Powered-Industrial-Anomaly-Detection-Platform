@@ -1,0 +1,29 @@
+# Environments
+venv/
+venv311/
+env/
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node
+node_modules/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+
+# Data & Models (excluding config.json and tiny files if you want to keep them, but let's exclude data for size reasons)
+ml-pipeline/data/*
+!ml-pipeline/data/.gitkeep
+history.db
+
+# OS
+.DS_Store
+Thumbs.db
