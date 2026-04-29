@@ -29,20 +29,17 @@ def get_unet_autoencoder(input_shape=(256, 256, 3)):
     
     # Decoder
     up5 = UpSampling2D(size=(2, 2))(conv4)
-    merge5 = concatenate([conv3, up5], axis=3)
-    conv5 = Conv2D(128, 3, padding='same')(merge5)
+    conv5 = Conv2D(128, 3, padding='same')(up5)
     conv5 = BatchNormalization()(conv5)
     conv5 = Activation('relu')(conv5)
     
     up6 = UpSampling2D(size=(2, 2))(conv5)
-    merge6 = concatenate([conv2, up6], axis=3)
-    conv6 = Conv2D(64, 3, padding='same')(merge6)
+    conv6 = Conv2D(64, 3, padding='same')(up6)
     conv6 = BatchNormalization()(conv6)
     conv6 = Activation('relu')(conv6)
     
     up7 = UpSampling2D(size=(2, 2))(conv6)
-    merge7 = concatenate([conv1, up7], axis=3)
-    conv7 = Conv2D(32, 3, padding='same')(merge7)
+    conv7 = Conv2D(32, 3, padding='same')(up7)
     conv7 = BatchNormalization()(conv7)
     conv7 = Activation('relu')(conv7)
     

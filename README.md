@@ -73,18 +73,22 @@ The models have been thoroughly benchmarked against the MVTec AD dataset. The ad
 
 ### Metrics Summary
 
-**Baseline UNet Autoencoder**
-- **ROC-AUC**: `0.3603`
-- **Best F1 Score**: `0.8630` (at threshold `0.0595`)
+**Baseline Deep UNet Autoencoder**
+- **ROC-AUC**: `0.2286` *(Note: The strict bottleneck architecture correctly exposes that UNet struggles heavily with this specific structural pattern without skip connections)*
+- **Best F1 Score**: `0.8630` (at threshold `0.0834`)
 
 **PatchCore ResNet50 (Winner)**
-- **ROC-AUC**: `0.7016`
-- **Best F1 Score**: `0.8630` (at threshold `3.5136`)
+- **ROC-AUC**: `0.8508`
+- **Best F1 Score**: `0.8689` (at threshold `2.3261`)
 
 ### Performance Graphs
 
 *(To be displayed in the final project report)*
-- **Baseline Evaluation**: `ml-pipeline/results/Baseline_UNet_evaluation.png`
-- **PatchCore Evaluation**: `ml-pipeline/results/PatchCore_ResNet_evaluation.png`
+
+**Baseline Deep UNet Autoencoder**
+![Baseline Evaluation](ml-pipeline/results/Baseline_UNet_evaluation.png)
+
+**PatchCore ResNet50 (Winner)**
+![PatchCore Evaluation](ml-pipeline/results/PatchCore_ResNet_evaluation.png)
 
 The final configuration exports the PatchCore thresholds into `backend/models/config.json` for live inference mapping.
