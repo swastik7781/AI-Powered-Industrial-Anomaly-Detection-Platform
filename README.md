@@ -9,13 +9,13 @@ A production-grade, end-to-end anomaly detection platform designed specifically 
 ## 📸 Platform Previews
 
 <div align="center">
-  <img src="docs/live_inspection.png" alt="Live Inspection Interface" width="800"/>
+  <img src="docs/live_inspection.jpeg" alt="Live Inspection Interface" width="800"/>
   <br/><i>Real-Time Live Inference Feed with Bounding Box Localization</i>
   <br/><br/>
-  <img src="docs/history.png" alt="Inspection History" width="800"/>
+  <img src="docs/history.jpeg" alt="Inspection History" width="800"/>
   <br/><i>Audit Log and Telemetry History</i>
   <br/><br/>
-  <img src="docs/settings.png" alt="System Configuration" width="800"/>
+  <img src="docs/settings.jpeg" alt="System Configuration" width="800"/>
   <br/><i>Dynamic Model Tuning & Threshold Settings</i>
 </div>
 
